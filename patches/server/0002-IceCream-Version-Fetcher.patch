@@ -38,6 +38,6 @@ index 0000000000000000000000000000000000000000..7dd13fdd42832120556dabd3b8086b30
 +
 +    @Override
 +    public @NotNull Component getVersionMessage(@NotNull String serverVersion) {
-+        return Component.text("CraftTrident: ").append(Component.text(serverVersion, NamedTextColor.GREEN));
++        return Component.text("IceCream: ").append(Component.text(serverVersion, NamedTextColor.GREEN));
 +    }
 +}
