@@ -3,8 +3,6 @@ From: Pancakse <pancakseyt@gmail.com>
 Date: Wed, 13 Dec 2023 20:37:51 -0700
 Subject: [PATCH] IceCream Version Fetcher
 
-This wont want to go with 0001 Rebrand so its on its own
-
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 index 1e81801e5701b08feedd840c1e1663ae26507c16..661db7845f65b20d63342c5174554d02062fd96b 100644
@@ -23,7 +21,7 @@ diff --git a/src/main/java/org/icecreammc/icecream/IceCreamVersionFetcher.java b
 new file mode 100644
 index 0000000000000000000000000000000000000000..7dd13fdd42832120556dabd3b8086b30ae509d9b
 --- /dev/null
-+++ b/src/main/java/org/crafttrident/trident/TridentVersionFetcher.java
++++ b/src/main/java/org/icecreammc/icecream/IceCreamVersionFetcher.java
 @@ -0,0 +1,18 @@
 +package org.crafttrident.trident;
 +
