@@ -6,10 +6,10 @@ Subject: [PATCH] IceCream Version Fetcher
 This wont want to go with 0001 Rebrand so its on its own
 
 
-diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
+diff --git a/src/main/java/org/crafttrident/trident/TridentVersionFetcher.java b/src/main/java/org/crafttrident/trident/TridentVersionFetcher.java
 index 462a6eed350fd660ddaf25d567bb6e97b77d0b2b..fb3d33117279df26ddd55005d16f80b6ce273ac3 100644
---- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-+++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
+--- /dev/null
++++ b/src/main/java/org/crafttrident/trident/TridentVersionFetcher.java
 @@ -20,21 +20,21 @@ import java.util.stream.StreamSupport;
  public class PaperVersionFetcher implements VersionFetcher {
      private static final java.util.regex.Pattern VER_PATTERN = java.util.regex.Pattern.compile("^([0-9\\.]*)\\-.*R"); // R is an anchor, will always give '-R' at end
