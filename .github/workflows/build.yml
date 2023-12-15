@@ -44,6 +44,8 @@ jobs:
           body: "What file to choose the IceCream Team recommends the paperclip reobf jar mojmap paperclip jar is fine but alot of plugins are not supported"
           token: ${{ secrets.TOKEN }}
           files: build/libs/*.jar
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       - name: Publish To Reposilite
         run: ./gradlew build publish --no-daemon --stacktrace
         continue-on-error: true
