@@ -46,6 +46,7 @@ jobs:
           files: build/libs/*.jar
       - name: Publish To Reposilite
         run: ./gradlew build publish
+        continue-on-error: true
         env:
           MAVEN_NAME: ${{ secrets.MAVEN_NAME }} # token name
           MAVEN_SECRET: ${{ secrets.MAVEN_SECRET }} # token secret (password)
