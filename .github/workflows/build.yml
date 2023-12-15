@@ -44,6 +44,11 @@ jobs:
           body: "What file to choose the IceCream Team recommends the paperclip reobf jar mojmap paperclip jar is fine but alot of plugins are not supported"
           token: ${{ secrets.TOKEN }}
           files: build/libs/*.jar
+      - name: Publish To Reposilite
+        run: ./gradlew build publish
+        env:
+          MAVEN_NAME: ${{ secrets.MAVEN_NAME }} # token name
+          MAVEN_SECRET: ${{ secrets.MAVEN_SECRET }} # token secret (password)
       - name: Github Releases To Discord
         continue-on-error: true
         uses: tsickert/discord-webhook@v5.3.0
