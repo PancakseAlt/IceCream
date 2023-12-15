@@ -45,7 +45,7 @@ jobs:
           token: ${{ secrets.TOKEN }}
           files: build/libs/*.jar
       - name: Publish To Reposilite
-        run: ./gradlew build publish
+        run: ./gradlew build publish --no-daemon --stacktrace
         continue-on-error: true
         env:
           MAVEN_NAME: ${{ secrets.MAVEN_NAME }} # token name
