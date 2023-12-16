@@ -233,7 +233,7 @@ index 0000000000000000000000000000000000000000..7824aa2b658b860b0c3a007e9299e406
 +            + "\n"
 +            + "Discord: COMING SOON \n"
 +            + "Docs: COMING SOON \n"
-+            + "New builds: https://github.com/IceCream/IceCream/releases/latest";
++            + "New builds: https://github.com/IceCreamMC/IceCream/releases/latest";
 +    private static File CONFIG_FILE;
 +    public static YamlConfiguration config;
 +
@@ -259,8 +259,8 @@ index 0000000000000000000000000000000000000000..7824aa2b658b860b0c3a007e9299e406
 +        commands = new HashMap<>();
 +        commands.put("icecream", new IceCreamCommand("icecream"));
 +
-+        version = getInt("config-version", 4);
-+        set("config-version", 4);
++        version = getInt("config-version", 2);
++        set("config-version", 2);
 +
 +        readConfig(IceCreamConfig.class, null);
 +
