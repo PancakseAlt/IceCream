@@ -57,4 +57,7 @@ jobs:
         uses: tsickert/discord-webhook@v5.3.0
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
-          content: "IceCream has recieved a new update! Please download on our Github page. https://www.github.com/IceCreamMC/IceCream/releases/latest"
+          embed-title: "New IceCreamMC Release!"
+          embed-url: "https://github.com/icecreammc/icecream/latest/releases"
+          embed-description: "IceCreamMC has published a new update! Click [here](https://icecreammc.github.io/icecream/download) to download IceCreamMC!"
+          embed-thumbnail-url: "https://avatars.githubusercontent.com/u/153784457?s=200&v=4"
