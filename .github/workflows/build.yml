@@ -23,6 +23,8 @@ jobs:
         run: ./gradlew applyPatches --no-daemon --stacktrace
       - name: Build Reobf Jar (Default)
         run: ./gradlew createReobfPaperclipJar --no-daemon --stacktrace
+      - name: Generate Development Bundle
+        run: ./gradlew generateDevelopmentBundle --no-daemon --stacktrace
       - name: Rebuild on Failure
         if: ${{ failure() }}
         run: |
