@@ -117,6 +117,39 @@ index 1ea3012995c738c67b31e997c138f824f9e69ba1..a506e9e645e35623b08ed98cdba7121d
      public final boolean forceGameMode = this.get("force-gamemode", false);
      public final boolean enforceWhitelist = this.get("enforce-whitelist", false);
      public final Difficulty difficulty;
+diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
+index 462a6eed350fd660ddaf25d567bb6e97b77d0b2b..4bec868ca5b0a88a3125b55f18bfe216fb68c572 100644
+--- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
++++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
+@@ -20,7 +20,7 @@ import java.util.stream.StreamSupport;
+ public class PaperVersionFetcher implements VersionFetcher {
+     private static final java.util.regex.Pattern VER_PATTERN = java.util.regex.Pattern.compile("^([0-9\\.]*)\\-.*R"); // R is an anchor, will always give '-R' at end
+     // Purpur start
+-    private static final String DOWNLOAD_PAGE = "https://purpurmc.org/downloads";
++    private static final String DOWNLOAD_PAGE = "https://github.com/IceCreamMC/IceCream"; // IceCream
+     private static int distance = -2; public int distance() { return distance; }
+     // Purpur end
+     private static @Nullable String mcVer;
+@@ -33,8 +33,8 @@ public class PaperVersionFetcher implements VersionFetcher {
+     @Nonnull
+     @Override
+     public Component getVersionMessage(@Nonnull String serverVersion) {
+-        String[] parts = serverVersion.substring("git-Purpur-".length()).split("[-\\s]"); // Purpur
+-        final Component updateMessage = getUpdateStatusMessage("PurpurMC/Purpur", "ver/" + getMinecraftVersion(), parts[0]); // Purpur
++        String[] parts = serverVersion.substring("git-IceCream-".length()).split("[-\\s]"); // IceCream
++        final Component updateMessage = getUpdateStatusMessage("IceCreamMC/IceCream", "ver/" + getMinecraftVersion(), parts[0]); // IceCream
+         final Component history = getHistory();
+ 
+         return history != null ? Component.join(net.kyori.adventure.text.JoinConfiguration.separator(Component.newline()), history, updateMessage) : updateMessage; // Purpur
+@@ -47,7 +47,7 @@ public class PaperVersionFetcher implements VersionFetcher {
+                 String result = matcher.group();
+                 mcVer = result.substring(0, result.length() - 2); // strip 'R' anchor and trailing '-'
+             } else {
+-                org.bukkit.Bukkit.getLogger().warning("Unable to match version to pattern! Report to Purpur!"); // Purpur
++                org.bukkit.Bukkit.getLogger().warning("Unable to match version to pattern! Report to IceCream!"); // Purpur
+                 org.bukkit.Bukkit.getLogger().warning("Pattern: " + VER_PATTERN.toString());
+                 org.bukkit.Bukkit.getLogger().warning("Version: " + org.bukkit.Bukkit.getBukkitVersion());
+             }
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
 index 0801dea155048ac5383295f4fef9bd597b678535..57112a0693db2c0dd0d3564f23d45d71fc071994 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
@@ -132,7 +165,7 @@ index 0801dea155048ac5383295f4fef9bd597b678535..57112a0693db2c0dd0d3564f23d45d71
                  log.log( Level.SEVERE, "If you see a world save or edit, then it means you did far more than your server can handle at once" );
                  log.log( Level.SEVERE, "\t If this is the case, consider increasing timeout-time in spigot.yml but note that this will replace the crash with LARGE lag spikes" );
 -                log.log( Level.SEVERE, "If you are unsure or still think this is a Purpur bug, please report this to https://github.com/PurpurMC/Purpur/issues" ); // Purpur
-+                log.log( Level.SEVERE, "If you are unsure or still think this is a IceCream bug, please report this to https://github.com/PurpurMC/Purpur/issues" ); // Purpur // IceCream
++                log.log( Level.SEVERE, "If you are unsure or still think this is a IceCream bug, please report this to https://github.com/IceCreamMC/IceCream/issues" ); // Purpur // IceCream
                  log.log( Level.SEVERE, "Be sure to include ALL relevant console errors and Minecraft crash reports" );
 -                log.log( Level.SEVERE, "Purpur version: " + Bukkit.getServer().getVersion() ); // Purpur
 +                log.log( Level.SEVERE, "IceCream version: " + Bukkit.getServer().getVersion() ); // Purpur // IceCream
