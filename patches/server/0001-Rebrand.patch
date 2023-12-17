@@ -104,19 +104,6 @@ index 3633574e112f217b412217dd243a631dc4e9c40c..d97db83d079d7a2354d796c186acb23d
      private static void serverModName() {
          serverModName = getString("settings.server-mod-name", serverModName);
      }
-diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
-index 1ea3012995c738c67b31e997c138f824f9e69ba1..a506e9e645e35623b08ed98cdba7121d82fe9c29 100644
---- a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
-+++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
-@@ -63,7 +63,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
-     public final boolean spawnNpcs = this.get("spawn-npcs", true);
-     public final boolean pvp = this.get("pvp", true);
-     public final boolean allowFlight = this.get("allow-flight", false);
--    public final String motd = this.get("motd", "A Minecraft Server");
-+    public final String motd = this.get("motd", "Powered By Ice Cream");
-     public final boolean forceGameMode = this.get("force-gamemode", false);
-     public final boolean enforceWhitelist = this.get("enforce-whitelist", false);
-     public final Difficulty difficulty;
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 index 462a6eed350fd660ddaf25d567bb6e97b77d0b2b..4bec868ca5b0a88a3125b55f18bfe216fb68c572 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
