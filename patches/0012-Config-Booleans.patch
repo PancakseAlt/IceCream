@@ -1,0 +1,114 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: NONPLAYT <76615486+NONPLAYT@users.noreply.github.com>
+Date: Sat, 16 Dec 2023 18:42:08 -0700
+Subject: [PATCH] Config Booleans
+
+
+diff --git a/src/main/java/org/icecreammc/icecream/configuration/IceCreamWorldConfig.java b/src/main/java/org/icecreammc/icecream/configuration/IceCreamWorldConfig.java
+index 5d16d2250bae9c982a0af9ad2580a63532b140f7..9eede8eb7fefc414f3a1207cd3ca2b33deb5ea13 100644
+--- a/src/main/java/org/icecreammc/icecream/configuration/IceCreamWorldConfig.java
++++ b/src/main/java/org/icecreammc/icecream/configuration/IceCreamWorldConfig.java
+@@ -77,4 +77,11 @@ public class IceCreamWorldConfig {
+         final Map<String, Object> value = IceCreamConfig.getMap("world-settings." + worldName + "." + path, null);
+         return value.isEmpty() ? fallback : value;
+     }
++
++    public boolean dontEjectPlayerFromBoatUnderwater = true;
++    public boolean alwaysAllowToEnterTheBoat = true;
++    private void boatFeatures() {
++        dontEjectPlayerFromBoatUnderwater = getBoolean("gameplay-mechanics.boat.dont-eject-players-from-boat-underwater", dontEjectPlayerFromBoatUnderwater);
++        alwaysAllowToEnterTheBoat = getBoolean("gameplay-mechanics.boat.always-allow-to-enter-the-boat", alwaysAllowToEnterTheBoat);
++    }
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/minecraft/world/entity/vehicle/Boat.java b/src/main/java/net/minecraft/world/entity/vehicle/Boat.java
+index 886a35937bfbb5b46d021fd42f89614f0df5d80f..6a433c616b6d7603f7277719d12519005799126c 100644
+--- a/src/main/java/net/minecraft/world/entity/vehicle/Boat.java
++++ b/src/main/java/net/minecraft/world/entity/vehicle/Boat.java
+@@ -401,7 +401,18 @@ public class Boat extends Entity implements VariantHolder<Boat.Type> {
+         }
+ 
+         if (!this.level().isClientSide && this.outOfControlTicks >= 60.0F) {
+-            this.ejectPassengers();
++            // IceCream start - Don't eject players
++            if (this.level().icecreamConfig.dontEjectPlayerFromBoatUnderwater) {
++                for (int i = this.passengers.size() - 1; i >= 0; --i) {
++                    Entity passenger = this.passengers.get(i);
++                    if (!(passenger instanceof Player)) {
++                        passenger.stopRiding();
++                    }
++                }
++            } else {
++                this.ejectPassengers();
++            }
++            // IceCream end
+         }
+ 
+         if (this.getHurtTime() > 0) {
+@@ -914,7 +925,13 @@ public class Boat extends Entity implements VariantHolder<Boat.Type> {
+ 
+     @Override
+     public InteractionResult interact(Player player, InteractionHand hand) {
+-        return player.isSecondaryUseActive() ? InteractionResult.PASS : (this.outOfControlTicks < 60.0F ? (!this.level().isClientSide ? (player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS) : InteractionResult.SUCCESS) : InteractionResult.PASS);
++        // IceCream start - always allow to enter the boat
++        if (this.level().icecreamConfig.alwaysAllowToEnterTheBoat) {
++            return player.isSecondaryUseActive() ? InteractionResult.PASS : (true || this.outOfControlTicks < 60.0F ? (!this.level().isClientSide ? (player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS) : InteractionResult.SUCCESS) : InteractionResult.PASS);
++        } else {
++            return player.isSecondaryUseActive() ? InteractionResult.PASS : (this.outOfControlTicks < 60.0F ? (!this.level().isClientSide ? (player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS) : InteractionResult.SUCCESS) : InteractionResult.PASS);
++        }
++        // IceCream end
+     }
+ 
+     @Override
+@@ -1010,7 +1027,13 @@ public class Boat extends Entity implements VariantHolder<Boat.Type> {
+ 
+     @Override
+     protected boolean canAddPassenger(Entity passenger) {
+-        return this.getPassengers().size() < this.getMaxPassengers() && !this.isEyeInFluid(FluidTags.WATER);
++        // IceCream start - always allow to enter the boat
++        if (this.level().icecreamConfig.alwaysAllowToEnterTheBoat) {
++            return this.getPassengers().size() < this.getMaxPassengers()/* && !this.isEyeInFluid(FluidTags.WATER)*/;
++        } else {
++            return this.getPassengers().size() < this.getMaxPassengers() && !this.isEyeInFluid(FluidTags.WATER);
++        }
++        // IceCream end
+     }
+ 
+     protected int getMaxPassengers() {
+diff --git a/src/main/java/org/icecreammc/icecream/configuration/IceCreamConfig.java b/src/main/java/org/icecreammc/icecream/configuration/IceCreamConfig.java
+index 9e802fbe8e5f1a3c24cb6bc9254c72a2a0c3fde1..426ae4086adc0180e3f3ba06cf6c005476ca891e 100644
+--- a/src/main/java/org/icecreammc/icecream/configuration/IceCreamConfig.java
++++ b/src/main/java/org/icecreammc/icecream/configuration/IceCreamConfig.java
+@@ -152,4 +152,9 @@ public class IceCreamConfig {
+         }
+         return builder.build();
+     }
++
++    public static boolean allowAnyUsername = false;
++    private static void allowAnyUsername() {
++        allowAnyUsername = getBoolean("settings.player.allow-any-username", allowAnyUsername);
++    }
+ }
+\ No newline at end of file
+diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
+index 3dcccca8ede9b203c24ba29b2020a583297b895c..272670750afe2d07e51f2f7589c5718a2c155ed4 100644
+--- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
++++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
+@@ -16,6 +16,8 @@ import java.util.concurrent.atomic.AtomicInteger;
+ import javax.annotation.Nullable;
+ import javax.crypto.Cipher;
+ import javax.crypto.SecretKey;
++
++import org.icecreammc.icecream.configuration.IceCreamConfig;
+ import net.minecraft.DefaultUncaughtExceptionHandler;
+ import net.minecraft.core.UUIDUtil;
+ import net.minecraft.network.Connection;
+@@ -160,7 +162,7 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+     @Override
+     public void handleHello(ServerboundHelloPacket packet) {
+         Validate.validState(this.state == ServerLoginPacketListenerImpl.State.HELLO, "Unexpected hello packet", new Object[0]);
+-        Validate.validState(ServerLoginPacketListenerImpl.isValidUsername(packet.name()), "Invalid characters in username", new Object[0]);
++        if (!IceCreamConfig.allowAnyUsername) Validate.validState(ServerLoginPacketListenerImpl.isValidUsername(packet.name()), "Invalid characters in username", new Object[0]); // IceCream - Allow any username
+         // Paper start - validate usernames
+         if (io.papermc.paper.configuration.GlobalConfiguration.get().proxies.isProxyOnlineMode() && io.papermc.paper.configuration.GlobalConfiguration.get().unsupportedSettings.performUsernameValidation) {
+             if (!this.iKnowThisMayNotBeTheBestIdeaButPleaseDisableUsernameValidation && !validateUsername(packet.name())) {
