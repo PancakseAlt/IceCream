@@ -113,7 +113,7 @@ index 462a6eed350fd660ddaf25d567bb6e97b77d0b2b..4bec868ca5b0a88a3125b55f18bfe216
      private static final java.util.regex.Pattern VER_PATTERN = java.util.regex.Pattern.compile("^([0-9\\.]*)\\-.*R"); // R is an anchor, will always give '-R' at end
      // Purpur start
 -    private static final String DOWNLOAD_PAGE = "https://purpurmc.org/downloads";
-+    private static final String DOWNLOAD_PAGE = "https://github.com/IceCreamMC/IceCream"; // IceCream
++    private static final String DOWNLOAD_PAGE = "https://icecreammc.github.io/icecream/downloads"; // IceCream
      private static int distance = -2; public int distance() { return distance; }
      // Purpur end
      private static @Nullable String mcVer;
