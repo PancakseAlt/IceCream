@@ -17,8 +17,8 @@
 
 </div>
 
-## Features
-# Adds Patches From Mirai For Optimizations
+# Features
+## Adds Patches From Mirai For Optimizations
 Like CPU and RAM
 
 # 
