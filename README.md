@@ -20,6 +20,8 @@
 # Features
 ## Adds Patches From Mirai For Optimizations
 Like CPU and RAM
+## No Spam Logs
+Saves storage with reducing the ammount of logs that are send
 
 # Self Buidling
 If you modify IceCream or just wanna build it your self here are the steps
@@ -47,3 +49,8 @@ If you modify IceCream or just wanna build it your self here are the steps
 ```./gradlew createMojmapPaperclipJar --no-daemon --stacktrace```
 
 5. After you should be done and it should be in build/libs!
+
+
+
+# Patches Credits
+## Mirai - for c2me and VMP
