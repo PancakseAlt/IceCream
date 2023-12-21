@@ -21,4 +21,29 @@
 ## Adds Patches From Mirai For Optimizations
 Like CPU and RAM
 
-# 
+# Self Buidling
+If you modify IceCream or just wanna build it your self here are the steps
+
+## Requirements
+1. RAM: We recommend having 16GB+ of RAM or your pc will freeze
+2. CPU: Atleast 4 cores+ Deff not a Celeron or a Platinum or a AMD A4
+3. Storage: Atleast 4GB+
+4. Git: You will need Git if your buiding
+
+
+## Steps
+
+1. Clone the IceCreamMC repository with 
+```git clone https://www.github.com/IceCreamMC/IceCream.git```
+
+2. Once you cloned the IceCreamMC repo make sure to setup gradle in your IDE or something with
+```gradle init```
+
+3. After apply patches with
+```./gradlew applyPatches --no-daemon --stacktrace```
+
+4. After if the build succeeds decide the JAR you wanna build
+```./gradlew createReobfPaperclipJar --no-daemon --stacktrace```
+```./gradlew createMojmapPaperclipJar --no-daemon --stacktrace```
+
+5. After you should be done and it should be in build/libs!
