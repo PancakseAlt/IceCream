@@ -12,7 +12,7 @@ upstream=$(git ls-remote https://github.com/PurpurMC/Purpur | grep ver/1.20.2 | 
 if [ "$current" != "$upstream" ]; then
     sed -i 's/purpurCommit = .*/purpurCommit = '"$upstream"'/' gradle.properties
     {
-      ./gradlew applyPatches --no-daemon --stacktrace && ./gradlew createReobfPaperclipJar --no-daemon --stacktrace && ./gradlew rebuildPatches --no-deamon --stacktrace
+      ./gradlew applyPatches --no-daemon --stacktrace && ./gradlew createReobfPaperclipJar --no-daemon --stacktrace && ./gradlew rebuildPatches --no-daemon --stacktrace
     } || exit
 
     git add .
