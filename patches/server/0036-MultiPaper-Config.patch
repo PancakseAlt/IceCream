@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: PureGero <puregero@gmail.com>
 Date: Fri, 4 Mar 2022 20:33:33 +1000
-Subject: [PATCH] MultiPaper config file
+Subject: [PATCH] MultiPaper Config
 
 
 diff --git a/src/main/java/io/papermc/paper/configuration/ConfigurationPart.java b/src/main/java/io/papermc/paper/configuration/ConfigurationPart.java
