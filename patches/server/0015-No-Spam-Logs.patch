@@ -3,11 +3,10 @@ From: Pancakse <pancakseyt@gmail.com>
 Date: Wed, 20 Dec 2023 20:34:12 -0700
 Subject: [PATCH] No Spam Logs
 
-Woohoo almost 2024 
-
+Woohoo almost 2024
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index a7e82f95db5c6c054175192f019072006a3ef31f..2b45fd656a3faad3529e93d6c2948bb733d377f1 100644
+index a7e82f95db5c6c054175192f019072006a3ef31f..c0b408f7dab436e383fbd82cabfa20946b119015 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -562,7 +562,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
@@ -46,4 +45,3 @@ index a7e82f95db5c6c054175192f019072006a3ef31f..2b45fd656a3faad3529e93d6c2948bb7
                                          ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), d11); // Purpur
                                  }
                                  // Paper end
-                            

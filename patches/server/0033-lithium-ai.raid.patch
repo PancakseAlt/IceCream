@@ -37,7 +37,7 @@ index eaa2943b667967f93f28d9d794d702fdaeb670ec..410ba320637ff94c1f318226a588d8ec
  
      public float getHealthOfLivingRaiders() {
 diff --git a/src/main/java/net/minecraft/world/entity/raid/Raider.java b/src/main/java/net/minecraft/world/entity/raid/Raider.java
-index cdbc925ef61b8b439415f0a89368227890bcecb2..b345aa9e407692301200af4fa7c2c087578c59ea 100644
+index 300411e88cdaef7e0ce280edbd5f18fa8d004a33..f1575776a84dacb167d644f9f2e5c7c340aaf01d 100644
 --- a/src/main/java/net/minecraft/world/entity/raid/Raider.java
 +++ b/src/main/java/net/minecraft/world/entity/raid/Raider.java
 @@ -46,8 +46,9 @@ import net.minecraft.world.phys.Vec3;
@@ -69,7 +69,7 @@ index cdbc925ef61b8b439415f0a89368227890bcecb2..b345aa9e407692301200af4fa7c2c087
          public ObtainRaidLeaderBannerGoal(T entityraider) { // CraftBukkit - decompile error
              this.mob = entityraider;
 @@ -322,7 +324,7 @@ public abstract class Raider extends PatrollingMonster {
-             if (!this.mob.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || !this.mob.canPickUpLoot()) return false; // Paper - respect game and entity rules for picking up items
+             if ((!this.mob.level().purpurConfig.pillagerBypassMobGriefing && !this.mob.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) || !this.mob.canPickUpLoot()) return false; // Paper - respect game and entity rules for picking up items // Purpur
              Raid raid = this.mob.getCurrentRaid();
  
 -            if (this.mob.hasActiveRaid() && !this.mob.getCurrentRaid().isOver() && this.mob.canBeLeader() && !ItemStack.matches(this.mob.getItemBySlot(EquipmentSlot.HEAD), Raid.getLeaderBannerInstance())) {
